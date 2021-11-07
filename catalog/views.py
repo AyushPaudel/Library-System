@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.views import generic
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # Create your views here.
 from .models import Book, Author, BookInstance, Genre
 
-
+@login_required()
 def index(request):
     """View function for home page of site."""
 
@@ -38,8 +41,7 @@ def index(request):
 #     queryset = Book.objects.all() # Get 5 books containing the title war
 #     template_name = 'book_list.html'
 
-
-class BookListView(generic.ListView):
+class BookListView(LoginRequiredMixin, generic.ListView):
     model = Book
     template_name = 'book_list.html'
     paginate_by = 2
@@ -56,12 +58,11 @@ class BookListView(generic.ListView):
         context['some_data'] = 'This is just some data'
         return context
 
-
-class BookDetailView(generic.DetailView):
+class BookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Book
     template_name = 'book_detail.html'
 
-class AuthorListView(generic.ListView):
+class AuthorListView(LoginRequiredMixin, generic.ListView):
     model = Author
     template_name = 'author_list.html'
     paginate_by = 2
@@ -78,7 +79,6 @@ class AuthorListView(generic.ListView):
         context['some_data'] = 'This is just some data'
         return context
 
-
-class AuthorDetailView(generic.DetailView):
+class AuthorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Author
     template_name = 'author_detail.html'
