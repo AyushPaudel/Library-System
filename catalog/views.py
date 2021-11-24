@@ -71,23 +71,23 @@ class BookDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = 'book_detail.html'
 
 
-class AuthorListView(LoginRequiredMixin, generic.ListView):
+class AuthorListView(generic.ListView):
     model = Author
     template_name = 'author_list.html'
-    paginate_by = 2
+    paginate_by = 10
 
     def get_queryset(self):
         return Author.objects.all()
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get the context
-        context = super(AuthorListView, self).get_context_data(**kwargs)
-        # Create any data and add it to the context
-        context['some_data'] = 'This is just some data'
-        return context
+    # def get_context_data(self, **kwargs):
+    #     # Call the base implementation first to get the context
+    #     context = super(AuthorListView, self).get_context_data(**kwargs)
+    #     # Create any data and add it to the context
+    #     context['some_data'] = 'This is just some data'
+    #     return context
 
 
-class AuthorDetailView(LoginRequiredMixin, generic.DetailView):
+class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = 'author_detail.html'
 
@@ -160,7 +160,7 @@ class AuthorCreate(PermissionRequiredMixin, CreateView):
     permission_required = 'catalog.can_mark_returned'
     model = Author
     fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
-    initial = {'date_of_birth': '11/06/2020'}
+    initial = {'date_of_death': '11/06/2020'}
 
 
 class AuthorUpdate(PermissionRequiredMixin, UpdateView):
