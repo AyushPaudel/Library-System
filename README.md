@@ -1,2 +1,3 @@
-# MDN-Django
-### Django from developer.mozilla.org
+# Library Management from MDN
+### A easy library management system backend
+
