@@ -32,3 +32,6 @@ urlpatterns += [
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG = TRUE:
+    print("Debug on cha")
