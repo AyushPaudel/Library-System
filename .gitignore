@@ -1,3 +1,4 @@
 ENV/
 .idea/
 */__pycache__/
+env/
